@@ -5,9 +5,15 @@ import {useState} from "react";
 function Signup() {
     const [newUser, setNewUser] = useState({});
     const navigate = useNavigate();
-    const signup = () =>{
-        service.signup(newUser)
-            .then(()=>navigate('/profile'))
+    const signup = () => {
+        const user = {
+            ...newUser,
+            joined: (new Date()).getDate().toString(),
+            followings: 0,
+            followers: 0
+        }
+        service.signup(user)
+            .then(()=>navigate(`/profile/${user.username}`))
             .catch(e => alert(e));
     }
 
@@ -57,10 +63,9 @@ function Signup() {
                                 <div className="label-birth">
                                     <label>Birthday</label>
                                 </div>
-
                                 <input className="mb-2 form-control"
                                        onChange={(e) =>
-                                           setNewUser({...newUser, birthday: e.target.value})}
+                                           setNewUser({...newUser, dateOfBirth: e.target.value})}
                                        type="Date"/>
                                 <button onClick={signup}
                                         className="btn btn-danger btn-width">Sign up

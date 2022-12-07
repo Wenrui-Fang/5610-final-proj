@@ -5,9 +5,9 @@ import {useState} from "react";
 function Login() {
     const [loginUser, setLoginUser] = useState({});
     const navigate = useNavigate();
-    const login = () =>{
+    const login = () => {
         service.login(loginUser)
-            .then(()=>navigate('/profile'))
+            .then((user)=>navigate(`/profile/${user.username}`))
             .catch(e => alert(e));
     }
 

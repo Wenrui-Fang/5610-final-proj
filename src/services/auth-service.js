@@ -22,3 +22,13 @@ export const logout = (user) =>
 export const login = (credentials) =>
     api.post(`${AUTH_API}/login`,credentials)
         .then(response => response.data);
+
+export const update = (user) =>
+    api.put(`${BASE_URL}/api/users/${user._id}`,user)
+        .then(response=>response.data);
+
+
+
+export const findUser = (username) =>
+    api.get(`${BASE_URL}/api/users/username/${username}`)
+        .then(response=>response.data);
