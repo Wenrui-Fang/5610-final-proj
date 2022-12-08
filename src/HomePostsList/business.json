@@ -1,0 +1,22 @@
+[
+  {
+    "_id": 123,
+    "name": "Tony's Piazza",
+    "image": "pizza.jpeg"
+  },
+  {
+    "_id": 234,
+    "name": "Tim's Piazza",
+    "image": "pizza.jpeg"
+  },
+  {
+    "_id": 345,
+    "name": "Jay's Piazza",
+    "image": "pizza.jpeg"
+  },
+  {
+    "_id": 456,
+    "name": "Rice's Piazza",
+    "image": "pizza.jpeg"
+  }
+]
