@@ -1,7 +1,7 @@
 import {BrowserRouter} from "react-router-dom";
 import {Routes, Route} from "react-router";
 import HomeComponent from "./HomeScreen";
-import DetailComponent from "./DetailScreen";
+import DetailComponent from "./FoodDetailScreen";
 import SearchComponent from "./SearchLandingScreen";
 
 function App() {
