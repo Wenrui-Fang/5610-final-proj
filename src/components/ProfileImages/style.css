@@ -1,0 +1,11 @@
+.header-image {
+    height: 15rem;
+}
+.header-image div {
+    height: 15rem;
+}
+.profile-photo {
+    width: 150px;
+    left: 2rem;
+    bottom: -4rem;
+}
