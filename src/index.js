@@ -6,6 +6,24 @@ import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import reducers from './reducers';
+import createSagaMiddleware from 'redux-saga';
+import Sagas from './sagas';
+
+//create saga middleware
+const sagaMiddleware = createSagaMiddleware();
+
+//create store, add reducers, attach saga
+const store = createStore(
+    reducers,
+    applyMiddleware(sagaMiddleware)
+);
+
+//run saga(s)
+sagaMiddleware.run(Sagas);
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
