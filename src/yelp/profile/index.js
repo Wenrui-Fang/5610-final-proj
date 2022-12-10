@@ -1,8 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {HashRouter, Link, Route, Routes, useNavigate, useLocation} from "react-router-dom";
-import * as service from "../../services/auth-service"
+import * as authService from "../../services/auth-service";
+import * as followService from "../../services/follow-service";
 import './index.css';
 import {useParams} from "react-router";
+import Following from "./followings";
+import Followers from "./followers";
 
 const Profile = () => {
     const {username} = useParams();
@@ -14,17 +17,17 @@ const Profile = () => {
         try {
             //check if this profile is current login user's
             console.log(username);
-            const getProfile = async() => await service.profile()
+            const getProfile = async() => await authService.profile()
                                             .then(user => setCurrentUser(user));
             let user = getProfile();
             if(username!==user.username){
-                const getUserByName = async() => await service.findUser(username)
+                const getUserByName = async() => await authService.findUser(username)
                     .then(user => {
                         setProfile(user);
                     });
                 user = getUserByName();
             }else{
-                const getUserByName = async() => await service.findUser(username)
+                const getUserByName = async() => await authService.findUser(username)
                     .then(user => {
                         setCurrentUser(user);
                         setProfile(user);
@@ -34,32 +37,61 @@ const Profile = () => {
         } catch (e) {
             navigate('/login');
         }
-    }, []);
+    }, [username]);
 
     const logout = () => {
-        service.logout()
+        authService.logout()
             .then(() => navigate('/login'));
     }
 
     const refreshUser = async () => {
-        let user = await service.findUser(username);
+        let user = await authService.findUser(username);
         setProfile(user);
     }
 
+    const followUser = async () => {
+        console.log(currentUser._id, profile._id);
+        followService.userTogglesUserFollows(currentUser._id, profile._id)
+            .then(refreshUser)
+            .catch(e => alert(e));
+    }
 
+    const follow = "Follow";
+    const unfollow = "Unfollow";
     return(
         <>
             <div className="wd-profile-header">
                 <div className="wd-banner-photo"/>
                 <img src="https://pbs.twimg.com/profile_images/1599202909962412032/QbvIJjti_400x400.jpg" className="wd-profile-photo"/>
                 <div className="float-end">
-                    <Link to={`/profile/${profile.username}/edit`}
-                          className="mt-2 me-2 btn btn-large btn-light border border-secondary fw-bolder rounded-pill fa-pull-right">
-                        Edit profile
-                    </Link>
-                    <button onClick={logout} className="mt-2 float-end btn btn-warning rounded-pill ms-2">
-                        Logout
-                    </button>
+                    {
+                        profile.username === currentUser.username
+                        &&<div>
+                            <Link to={`/profile/${profile.username}/edit`}
+                                  className="mt-2 me-2 btn btn-large btn-light border border-secondary fw-bolder rounded-pill fa-pull-right">
+                                Edit profile
+                            </Link>
+                            <button type="button" onClick={logout} className="mt-2 float-end btn btn-warning rounded-pill">
+                                Logout
+                            </button>
+                        </div>
+
+                    }
+                    {
+                        profile.username !== currentUser.username &&
+                        <div>
+                            <button onClick={followUser} className="mt-2 me-3 float-end btn btn-primary rounded-pill">
+                                {
+                                    profile.followedByMe && unfollow
+                                }
+                                {
+                                    profile.followedByMe === false && follow
+                                }
+                            </button>
+                        </div>
+
+                    }
+
                 </div>
             </div>
             <div className="wd-profile-name">
@@ -74,7 +106,7 @@ const Profile = () => {
                     <span className="me-3">Yelp Since {profile.joined===undefined&&<span>2022-12-7</span>}
                         {profile.joined!==undefined&&<span>{profile.dateOfBirth.joined(0,10)}</span>}</span>
                 </p>
-                <Link to={`/profile/${profile.username}/following` } className="text-decoration-none"><b>{profile.followings}</b> Following</Link>
+                <Link to={`/profile/${profile.username}/followings` } className="text-decoration-none"><b>{profile.followings}</b> Following</Link>
                 <Link to={`/profile/${profile.username}/followers`} className="text-decoration-none"><b className="ms-4">{profile.followers}</b> Followers</Link>
                 <p className="pt-2">
                     <b>Things I Love</b><br/>
@@ -100,8 +132,22 @@ const Profile = () => {
                               className={`nav-link ${location.pathname.indexOf('mycollects') >= 0 ? 'active':''}`}>
                             Collections</Link>
                     </li>
+                    <li className="nav-item">
+                        <Link to={`/profile/${profile.username}/followings`}
+                              className={`nav-link ${location.pathname.indexOf('followings') >= 0 ? 'active':''}`}>
+                            Followings</Link>
+                    </li>
+                    <li className="nav-item">
+                        <Link to={`/profile/${profile.username}/followers`}
+                              className={`nav-link ${location.pathname.indexOf('followers') >= 0 ? 'active':''}`}>
+                            Followers</Link>
+                    </li>
                 </ul>
             </div>
+            <Routes>
+                <Route path="/followings" element={<Following username={profile.username}/>}/>
+                <Route path="/followers" element={<Followers username={profile.username}/>}/>
+            </Routes>
         </>
 
 
