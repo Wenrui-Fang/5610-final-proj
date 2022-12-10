@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import styles from './index.css';
+import styles from './index.module.css';
 import { useNavigate } from "react-router-dom";
 
 export function SearchBar(props) {
@@ -8,9 +8,7 @@ export function SearchBar(props) {
     const navigate = useNavigate();
 
     function submit(e) {
-
-        navigate(`?find_loc=${location}`)
-
+        navigate(`?find_loc=${location}`);
         if(typeof props.search === 'function') {
             props.search(location);
         }
@@ -20,6 +18,8 @@ export function SearchBar(props) {
 
     const sizeClass = props.small ? '' : 'is-medium';
     return (
+        <div className={styles.landing}>
+            <div className={styles['search-area']}>
         <form onSubmit={submit}>
             <div className="field has-addons">
                 <p className="control">
@@ -37,5 +37,7 @@ export function SearchBar(props) {
                 </div>
             </div>
         </form>
+            </div>
+        </div>
     );
 }

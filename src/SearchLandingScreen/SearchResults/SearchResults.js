@@ -1,6 +1,6 @@
 import React from 'react';
 import { SearchResult } from './SearchResult/SearchResult';
-import styles from './index.css';
+import styles from './index.module.css';
 import { Spinner } from '../../Spinner/Spinner.js';
 
 export function SearchResults(props) {
@@ -10,8 +10,16 @@ export function SearchResults(props) {
     }
 
     return (
-        <div className={styles['search-results']}>
-            {searchResults}
+        <div className="container">
+            <div className="row">
+                <div className="col-3"></div>
+                <div className="col-6">
+                    <div className={styles['search-results']}>
+                        {searchResults}
+                    </div>
+                </div>
+                <div className="col-3"></div>
+            </div>
         </div>
     );
 }

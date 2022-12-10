@@ -10,3 +10,14 @@
 :global(.icon).search-icon {
     color: white;
 }
+
+.search-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.landing {
+    display: flex;
+    justify-content: center;
+}
