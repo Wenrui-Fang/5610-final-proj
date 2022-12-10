@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import StarRating from "../StarRate";
-import * as service from "../services/ReviewService.js"
+import * as reviewService from "../services/ReviewService.js"
+import * as authService from "../services/auth-service.js"
 import {useNavigate} from "react-router";
 import {starNum} from "../StarRate";
 
@@ -21,13 +22,20 @@ const ReviewComponent = () => {
     const nav = () => {
         navigate(`/`)
     }
+
+    const [currentUser, setCurrentUser] = useState({});
+    const getProfile = async () => await authService.profile()
+        .then(user => setCurrentUser(user));
+    let user = getProfile();
+
     const reviewClickHandler = () => {
         const newReview = {
             restaurant: "Taco",
             text: reviewComment,
-            star: starNum
+            star: starNum,
+            reviewByUserId: currentUser._id
         }
-        service.createReview(newReview).then(() =>customizedAlert("Posted successfully! Jump in three seconds...", 3000))
+        reviewService.createReview(newReview).then(() =>customizedAlert("Posted successfully! Jump in three seconds...", 3000))
             .then(() =>setTimeout(nav, 3000))
             .catch(e => alert(e));
     }
