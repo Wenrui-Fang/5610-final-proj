@@ -7,7 +7,7 @@ function Login() {
     const navigate = useNavigate();
     const login = () => {
         service.login(loginUser)
-            .then((user)=>navigate(`/profile/${user.username}`))
+            .then((user)=>navigate("/"))
             .catch(e => alert(e));
     }
 
