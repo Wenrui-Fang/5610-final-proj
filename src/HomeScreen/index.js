@@ -1,9 +1,17 @@
-import React from "react";
+import React, {useState} from "react";
 import "./home.css"
 import HomePostsList from "../HomePostsList";
+import {Link} from "react-router-dom";
+import * as authService from "../services/auth-service.js"
 
 const HomeComponent = () => {
-    const loggedIn = false
+    let loggedIn = false
+    const [currentUser, setCurrentUser] = useState({});
+    const getProfile = async () => await authService.profile()
+        .then(user => setCurrentUser(user));
+    let user = getProfile();
+    // console.log(currentUser)
+    loggedIn = currentUser.username !== undefined;
     return (
         <>
             <div className="wd-home_banner position-relative">
@@ -33,16 +41,18 @@ const HomeComponent = () => {
                             {!loggedIn &&
                                 <>
                                     <button className="btn btn-outline-light me-2 fw-bolder">
-                                        Log In
+                                        <Link to="/login" className="text-decoration-none text-white">Log In</Link>
                                     </button>
                                     <button className="btn btn-danger fw-bolder">
-                                        Sign Up
+                                        <Link to="/signup" className="text-decoration-none text-white">Sign Up</Link>
                                     </button>
                                 </>
                             }
                             {loggedIn &&
                                 <>
-                                    <i className="bi bi-person-circle fs-2"></i>
+                                    <Link to="/profile" className="text-decoration-none text-white">
+                                        <i className="bi bi-person-circle fs-2"></i>
+                                    </Link>
                                 </>
                             }
                         </h3>

@@ -2,6 +2,8 @@
 import Star from "./Star";
 import React from "react";
 
+export let starNum;
+
 function StarRating(props) {
     // Display score
     const [rating, setRating] = React.useState(
@@ -15,14 +17,16 @@ function StarRating(props) {
             val = event.target.getAttribute("star-id");
         setSelection(val);
     };
+    const setStar = (event) => {
+        setRating(event.target.getAttribute("star-id") || rating)
+        starNum = event.target.getAttribute("star-id") || rating
+    }
     return (
         <div
             // mouseover effect
             onMouseOut={() => hoverOver(null)}
             // Click to select score
-            onClick={event =>
-                setRating(event.target.getAttribute("star-id") || rating)
-            }
+            onClick={event => setStar(event)}
             onMouseOver={hoverOver}
         >
             {/*Create 5 stars components*/}

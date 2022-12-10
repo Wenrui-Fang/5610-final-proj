@@ -1,0 +1,56 @@
+.login-banner {
+    height: 64px;
+    background-color: red;
+}
+
+.flex-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup-form-container {
+     width: 360px;
+     margin-top: 80px;
+     padding: 30px;
+
+     text-align: center;
+}
+
+.login-title {
+    font-size: 20px;
+}
+
+.subheading{
+    font-size:13px;
+}
+
+.no-decoration {
+    text-decoration: none;
+}
+
+.legal-copy {
+    font-size: 12px;
+    color: grey;
+}
+
+.btn-width{
+    width: 300px;
+    max-width: 300px;
+}
+
+.sub-text-box{
+    text-align: right;
+    margin-top: 10px;
+    font-size: 12px;
+    color: grey;
+}
+
+.picture-container {
+    margin: 30px;
+    padding-top: 20px;
+}
+
+.label-birth{
+    text-align: left;
+}
