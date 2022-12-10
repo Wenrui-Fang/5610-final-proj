@@ -1,0 +1,23 @@
+.input-control {
+    min-width: 320px;
+}
+
+:global(.button).search-button {
+    background: #bd1f1f;
+    border: none;
+}
+
+:global(.icon).search-icon {
+    color: white;
+}
+
+.search-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.landing {
+    display: flex;
+    justify-content: center;
+}
