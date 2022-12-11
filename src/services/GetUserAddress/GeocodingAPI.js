@@ -10,8 +10,10 @@ export const useFetchLocationName = async (lat, lng) => {
             // console.log(
             //     'ADDRESS GEOCODE is BACK!! => ' + JSON.stringify(responseJson),
             // );
-            // console.log(responseJson)
+            if (responseJson.results[0].locations[0] !==undefined) {
+            // console.log(responseJson.results[0].locations[0].adminArea5)
             setData(responseJson.results[0].locations[0].adminArea5)
+            }
         });
     return data
 };

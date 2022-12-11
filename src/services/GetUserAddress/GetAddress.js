@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useFetchLocationName} from "./GeocodingAPI.js";
 
-export const useAddress = () => {
+export const useAddress = async () => {
     const [lat, setLat] = useState(null);
     const [lng, setLng] = useState(null);
     const getLatitudeLongitude = () => {
@@ -18,5 +18,5 @@ export const useAddress = () => {
     }
     getLatitudeLongitude()
 
-    return useFetchLocationName(lat, lng)
+    return await useFetchLocationName(lat, lng)
 }
