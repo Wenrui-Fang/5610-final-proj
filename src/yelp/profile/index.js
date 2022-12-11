@@ -6,6 +6,7 @@ import './index.css';
 import {useParams} from "react-router";
 import Following from "./followings";
 import Followers from "./followers";
+import UserProfile from "./user-profile";
 
 const Profile = () => {
     const {username} = useParams();
@@ -18,7 +19,7 @@ const Profile = () => {
             //check if this profile is current login user's
             console.log(username);
             const getProfile = async() => await authService.profile()
-                                            .then(user => setCurrentUser(user));
+                .then(user => setCurrentUser(user));
             let user = getProfile();
             if(username!==user.username){
                 const getUserByName = async() => await authService.findUser(username)
@@ -39,116 +40,19 @@ const Profile = () => {
         }
     }, [username]);
 
-    const logout = () => {
-        authService.logout()
-            .then(() => navigate('/login'));
-    }
 
-    const refreshUser = async () => {
-        let user = await authService.findUser(username);
-        setProfile(user);
-    }
-
-    const followUser = async () => {
-        console.log(currentUser._id, profile._id);
-        followService.userTogglesUserFollows(currentUser._id, profile._id)
-            .then(refreshUser)
-            .catch(e => alert(e));
-    }
-
-    const follow = "Follow";
-    const unfollow = "Unfollow";
     return(
-        <>
-            <div className="wd-profile-header">
-                <div className="wd-banner-photo"/>
-                <img src="https://pbs.twimg.com/profile_images/1599202909962412032/QbvIJjti_400x400.jpg" className="wd-profile-photo"/>
-                <div className="float-end">
-                    {
-                        profile.username === currentUser.username
-                        &&<div>
-                            <Link to={`/profile/${profile.username}/edit`}
-                                  className="mt-2 me-2 btn btn-large btn-light border border-secondary fw-bolder rounded-pill fa-pull-right">
-                                Edit profile
-                            </Link>
-                            <button type="button" onClick={logout} className="mt-2 float-end btn btn-warning rounded-pill">
-                                Logout
-                            </button>
-                        </div>
+        <div className="container">
+            {
+                currentUser.accountType==='PERSONAL' &&
+                <UserProfile profile={profile} currentUser={currentUser} setProfile={setProfile}/>
+            }
+            {
+                currentUser.accountType==='ADMIN' &&
+                <UserProfile profile={profile} currentUser={currentUser}/>
+            }
 
-                    }
-                    {
-                        profile.username !== currentUser.username &&
-                        <div>
-                            <button onClick={followUser} className="mt-2 me-3 float-end btn btn-primary rounded-pill">
-                                {
-                                    profile.followedByMe && unfollow
-                                }
-                                {
-                                    profile.followedByMe === false && follow
-                                }
-                            </button>
-                        </div>
-
-                    }
-
-                </div>
-            </div>
-            <div className="wd-profile-name">
-                <h5 className="text-black mb-0"><b>{profile.firstName} {profile.lastName}</b></h5>
-                <p>
-                    <i className="bi bi-geo me-1"/>
-                    <span className="me-3">Seattle, WA</span>
-                    <i className="bi bi-balloon-heart me-1"/>
-                    <span className="me-3">Born {profile.dateOfBirth===undefined&&<span>1958-10-1</span>}
-                        {profile.dateOfBirth!==undefined&&<span>{profile.dateOfBirth.substring(0,10)}</span>}</span>
-                    <i className="bi bi-yelp me-1"/>
-                    <span className="me-3">Yelp Since {profile.joined===undefined&&<span>2022-12-7</span>}
-                        {profile.joined!==undefined&&<span>{profile.joined.substring(0,10)}</span>}</span>
-                </p>
-                <Link to={`/profile/${profile.username}/followings` } className="text-decoration-none"><b>{profile.followings}</b> Following</Link>
-                <Link to={`/profile/${profile.username}/followers`} className="text-decoration-none"><b className="ms-4">{profile.followers}</b> Followers</Link>
-                <p className="pt-2">
-                    <b>Things I Love</b><br/>
-                    {
-                        profile.thingsILove && <span>{profile.thingsILove}</span>
-                    }
-                    {
-                        profile.thingsILove===undefined &&
-                        <span>You haven't told us yet ... do tell!</span>
-                    }
-
-                </p>
-            </div>
-            <div>
-                <ul className="mt-4 nav nav-pills nav-fill">
-                    <li className="nav-item">
-                        <Link to={`/profile/${profile.username}/myreviews`}
-                              className={`nav-link ${location.pathname.indexOf('myreviews') >= 0 ? 'active':''}`}>
-                            Reviews</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to={`/profile/${profile.username}/mycollects`}
-                              className={`nav-link ${location.pathname.indexOf('mycollects') >= 0 ? 'active':''}`}>
-                            Collections</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to={`/profile/${profile.username}/followings`}
-                              className={`nav-link ${location.pathname.indexOf('followings') >= 0 ? 'active':''}`}>
-                            Followings</Link>
-                    </li>
-                    <li className="nav-item">
-                        <Link to={`/profile/${profile.username}/followers`}
-                              className={`nav-link ${location.pathname.indexOf('followers') >= 0 ? 'active':''}`}>
-                            Followers</Link>
-                    </li>
-                </ul>
-            </div>
-            <Routes>
-                <Route path="/followings" element={<Following username={profile.username}/>}/>
-                <Route path="/followers" element={<Followers username={profile.username}/>}/>
-            </Routes>
-        </>
+        </div>
 
 
     );

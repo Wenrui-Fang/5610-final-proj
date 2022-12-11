@@ -7,6 +7,27 @@ const EditProfile = () => {
     const [updateUser,setUpdateUser] = useState({});
     const navigate = useNavigate();
 
+    const imageData = (file) => {
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(file)
+            fileReader.onload = () => {
+                resolve(fileReader.result);
+            }
+            fileReader.onerror = (error) => {
+                reject(error);
+            }
+        })
+    }
+
+    const handleProfilePhoto = async (event) => {
+        const file = event.target.files[0]
+        const img = await imageData(file)
+        setUpdateUser({...updateUser,
+                          profilePhoto: img})
+    }
+
+
     useEffect(() => {
         try {
             const getProfile = async() => await service.profile().then((user) => {
@@ -45,7 +66,7 @@ const EditProfile = () => {
                 <h4 className="p-2 mb-0 pb-0 fw-bolder">Edit profile</h4>
                 <div className="mt-3 mb-5 position-relative">
                     <div className="wd-banner-photo"/>
-                    <img src="https://pbs.twimg.com/profile_images/1599202909962412032/QbvIJjti_400x400.jpg" className="wd-profile-photo"/>
+                    <img src={profile.profilePhoto===undefined?"https://pbs.twimg.com/profile_images/1599202909962412032/QbvIJjti_400x400.jpg":`${profile.profilePhoto}`} className="wd-profile-photo"/>
                 </div>
             </div>
             <form action="profile.html">
@@ -105,6 +126,14 @@ const EditProfile = () => {
                            type="password"
                            onChange={(e) =>
                                setUpdateUser({...updateUser,password: e.target.value})}/>
+                </div>
+                <div className="border border-secondary rounded-3 p-2 mb-3">
+                    <label htmlFor="photo">Profile photo</label>
+                    <input id="photo"
+                           className="p-0 form-control border-0"
+                           onChange={e => handleProfilePhoto(e)}
+                           type="file" name="myImage" accept="image/png, image/jpg"
+                    />
                 </div>
                 <div className="border border-secondary rounded-3 p-2 mb-3">
                     <label for="account">Select account</label>
