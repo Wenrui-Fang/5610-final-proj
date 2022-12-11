@@ -2,10 +2,11 @@ import React, {useState} from "react";
 import StarRating from "../StarRate";
 import * as reviewService from "../services/ReviewService.js"
 import * as authService from "../services/auth-service.js"
-import {useNavigate} from "react-router";
+import {useNavigate, useParams} from "react-router";
 import {starNum} from "../StarRate";
 
 const ReviewComponent = () => {
+    const {businessId} = useParams();
     let [reviewComment, setReviewComment] = useState('');
     const navigate = useNavigate();
 
@@ -30,7 +31,7 @@ const ReviewComponent = () => {
 
     const reviewClickHandler = () => {
         const newReview = {
-            restaurant: "Taco",
+            businessId: businessId,
             text: reviewComment,
             star: starNum,
             reviewByUserId: currentUser._id

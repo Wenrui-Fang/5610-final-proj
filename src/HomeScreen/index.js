@@ -3,23 +3,48 @@ import "./home.css"
 import HomePostsList from "../HomePostsList";
 import {Link} from "react-router-dom";
 import * as authService from "../services/auth-service.js"
+import * as api from "../services/officialyelp/yelp-api.js"
+import {useAddress} from "../services/GetUserAddress/GetAddress.js";
 
 const HomeComponent = () => {
     let loggedIn = false
+    const [addressData, setAddressData] = useState({})
+    const [businessesData, setBusinessesData] = useState({})
     const [currentUser, setCurrentUser] = useState({});
     const getProfile = async () => await authService.profile()
         .then(user => setCurrentUser(user));
     let user = getProfile();
     // console.log(currentUser)
     loggedIn = currentUser.username !== undefined;
+
+
+    // https://developer.mapquest.com/documentation/geocoding-api/reverse/get
+    // Get user's current location and get restaurants near the address
+    const useAddressData = async () => await useAddress().then(data => setAddressData(data));
+    let address = useAddressData()
+    // console.log(addressData)
+    const fetchData = async () => {
+        try {
+            const resp = await api.findBusinesses(addressData);
+            // console.log(resp.businesses)
+            setBusinessesData(resp.businesses)
+        } catch (e) {
+            console.error(e);
+        }
+    };
+    let business = fetchData();
+
     return (
         <>
             <div className="wd-home_banner position-relative">
                 <div className="row pt-3">
                     <div className="col-3">
-                        <h1 className="ps-3 fw-bolder text-white">Yelp
-                            <i className="bi bi-yelp text-danger ms-2"></i>
-                        </h1>
+                        <Link to="/" className="text-decoration-none">
+                            <h1 className="ps-3 fw-bolder text-white">
+                                Yelp
+                                <i className="bi bi-yelp text-danger ms-2"></i>
+                            </h1>
+                        </Link>
                     </div>
                     <div className="col-6 pt-1">
                         <div className="row">
@@ -50,7 +75,8 @@ const HomeComponent = () => {
                             }
                             {loggedIn &&
                                 <>
-                                    <Link to={`/profile/${currentUser.username}`} className="text-decoration-none text-white">
+                                    <Link to={`/profile/${currentUser.username}`}
+                                          className="text-decoration-none text-white">
                                         <i className="bi bi-person-circle fs-2"></i>
                                     </Link>
                                 </>
@@ -63,7 +89,7 @@ const HomeComponent = () => {
                 </h1>
             </div>
             <div className="container">
-                <HomePostsList/>
+                <HomePostsList businessesData={businessesData}/>
             </div>
         </>
     );
