@@ -8,6 +8,7 @@ import Login from "./yelp/login";
 import Signup from "./yelp/signup";
 import Profile from "./yelp/profile";
 import EditProfile from "./yelp/profile/edit-profile";
+import Following from "./yelp/profile/followings";
 
 function App() {
     return (
