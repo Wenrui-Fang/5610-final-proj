@@ -1,6 +1,6 @@
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import * as service from "../../services/auth-service";
-import {useState} from "react";
+import React, {useState} from "react";
 
 function Login() {
     const [loginUser, setLoginUser] = useState({});
@@ -14,7 +14,12 @@ function Login() {
     return (
         <div>
             <div className="login-banner bg-danger">
-                Yelp
+                <Link to="/" className="text-decoration-none">
+                    <h1 className="fw-bolder text-white text-center pt-1">
+                        Yelp
+                        <i className="bi bi-yelp ms-2"></i>
+                    </h1>
+                </Link>
             </div>
             <div className="container">
                 <div className="row mt-5">
