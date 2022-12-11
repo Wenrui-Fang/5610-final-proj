@@ -50,7 +50,7 @@ const HomeComponent = () => {
                             }
                             {loggedIn &&
                                 <>
-                                    <Link to="/profile" className="text-decoration-none text-white">
+                                    <Link to={`/profile/${currentUser.username}`} className="text-decoration-none text-white">
                                         <i className="bi bi-person-circle fs-2"></i>
                                     </Link>
                                 </>

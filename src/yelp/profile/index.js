@@ -72,7 +72,7 @@ const Profile = () => {
                         {profile.dateOfBirth!==undefined&&<span>{profile.dateOfBirth.substring(0,10)}</span>}</span>
                     <i className="bi bi-yelp me-1"/>
                     <span className="me-3">Yelp Since {profile.joined===undefined&&<span>2022-12-7</span>}
-                        {profile.joined!==undefined&&<span>{profile.dateOfBirth.joined(0,10)}</span>}</span>
+                        {profile.joined!==undefined&&<span>{profile.joined.substring(0,10)}</span>}</span>
                 </p>
                 <Link to={`/profile/${profile.username}/following` } className="text-decoration-none"><b>{profile.followings}</b> Following</Link>
                 <Link to={`/profile/${profile.username}/followers`} className="text-decoration-none"><b className="ms-4">{profile.followers}</b> Followers</Link>
