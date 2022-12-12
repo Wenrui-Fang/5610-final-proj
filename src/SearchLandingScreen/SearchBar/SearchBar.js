@@ -1,24 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import styles from './index.module.css';
 import { Link, useNavigate } from "react-router-dom";
-import * as authService from "../../services/auth-service";
 
 export function SearchBar(props) {
     const [term, setTerm] = useState(props.term || '');
     const [location, setLocation] = useState(props.location || '');
-
-    let loggedIn = false
-    const [currentUser, setCurrentUser] = useState({});
-    useEffect(()=> {
-        try {
-            const getProfile = async () => await authService.profile().then(user => setCurrentUser(user));
-            let user = getProfile();
-        } catch (e) {
-            setCurrentUser(undefined);
-        }
-    },[])
-    // console.log(currentUser)
-    loggedIn = currentUser.username !== undefined;
 
     const navigate = useNavigate();
 
@@ -47,7 +33,7 @@ export function SearchBar(props) {
             <div className="row pt-3">
                 <div className="col-3">
                     <Link to="/" className="text-decoration-none">
-                        <h1 className="ps-3 fw-bolder text-white">
+                        <h1 className="ps-3 fw-bolder text-black">
                             Yelp
                             <i className="bi bi-yelp text-danger ms-2"></i>
                         </h1>
@@ -90,21 +76,21 @@ export function SearchBar(props) {
                     </div>
                 </div>
                 <div className="col-3 pt-1">
-                    <h3 className="text-white float-end pe-5">
-                        {!loggedIn &&
+                    <h3 className="text-black float-end pe-5">
+                        {!props.loggedIn &&
                             <>
-                                <button className="btn btn-outline-light me-2 fw-bolder">
-                                    <Link to="/login" className="text-decoration-none text-white">Log In</Link>
+                                <button className="btn btn-outline-dark me-2 fw-bolder">
+                                    <Link to="/login" className="text-decoration-none text-black">Log In</Link>
                                 </button>
                                 <button className="btn btn-danger fw-bolder">
                                     <Link to="/signup" className="text-decoration-none text-white">Sign Up</Link>
                                 </button>
                             </>
                         }
-                        {loggedIn &&
+                        {props.loggedIn &&
                             <>
-                                <Link to={`/profile/${currentUser.username}`}
-                                      className="text-decoration-none text-white">
+                                <Link to={`/profile/${props.currentUser.username}`}
+                                      className="text-decoration-none text-black">
                                     <i className="bi bi-person-circle fs-2"></i>
                                 </Link>
                             </>

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { SearchBar } from './SearchBar/SearchBar';
 import { SearchResults } from './SearchResults/SearchResults';
 import { useLocation } from "react-router";
 import { useBusinessSearch } from '../services/officialyelp/useBusinessSearch';
 import { SearchResultsSummary } from "./SearchResults/SearchResultsSummary/SearchResultsSummary";
+import * as authService from "../services/auth-service";
 
 const SearchComponent = () => {
     const location = useLocation();
@@ -12,6 +13,19 @@ const SearchComponent = () => {
     const termParam = params.get('find_desc');
     const searchInputParams = [termParam, locationParam];
     const [businesses, amountResults, searchParams, performSearch] = useBusinessSearch(searchInputParams);
+
+    let loggedIn = false
+    const [currentUser, setCurrentUser] = useState({});
+    useEffect(() => {
+        try {
+            const getProfile = async () => await authService.profile().then(user => setCurrentUser(user));
+            let user = getProfile();
+        } catch (e) {
+            setCurrentUser(undefined);
+        }
+    }, [])
+    // console.log(currentUser)
+    loggedIn = currentUser.username !== undefined;
 
     // When path is plain simple '/search', show the search input and a message to user.
     if (!locationParam || !termParam) {
@@ -37,7 +51,7 @@ const SearchComponent = () => {
 
     return (
         <div>
-            <SearchBar term={termParam} location={locationParam} onSearchLandingPage={true} search={search}/>
+            <SearchBar term={termParam} location={locationParam} loggedIn={loggedIn} currentUser={currentUser} onSearchLandingPage={true} search={search}/>
             <SearchResultsSummary term={termParam}
                                   location={locationParam}
             />
