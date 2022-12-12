@@ -8,17 +8,17 @@ import {useAddress} from "../services/GetUserAddress/GetAddress.js";
 
 const HomeComponent = () => {
     let loggedIn = false
-    const [addressData, setAddressData] = useState("Boston")
+    const [addressData, setAddressData] = useState("")
     const [businessesData, setBusinessesData] = useState({})
     const [currentUser, setCurrentUser] = useState({});
-    useEffect(()=> {
+    useEffect(() => {
         try {
             const getProfile = async () => await authService.profile().then(user => setCurrentUser(user));
             let user = getProfile();
         } catch (e) {
             setCurrentUser(undefined);
         }
-    },[])
+    }, [])
     // console.log(currentUser)
     loggedIn = currentUser.username !== undefined;
 
@@ -28,24 +28,24 @@ const HomeComponent = () => {
     try {
         const useAddressData = async () => await useAddress()
             .then(data => {
-                data === null ? setAddressData("Boston") : setAddressData(data)
+                data === null ? setAddressData("") : setAddressData(data)
             });
         let address = useAddressData()
     } catch (e) {
-        setAddressData("Boston");
+        setAddressData("");
     }
 
-    console.log(addressData)
-    const fetchData = async () => {
+    // console.log(addressData)
+    useEffect(() => {
         try {
-            const resp = await api.findBusinesses(addressData);
-            console.log(resp.businesses)
-            setBusinessesData(resp.businesses)
+            const fetchData = async () => await api.findBusinesses(addressData)
+                .then(data => setBusinessesData(data.businesses))
+            let business = fetchData();
         } catch (e) {
-            console.error(e);
+            console.log("fetch business data fail!")
         }
-    };
-    let business = fetchData();
+    }, [addressData])
+    // console.log(businessesData)
 
     return (
         <>
@@ -102,7 +102,7 @@ const HomeComponent = () => {
                 </h1>
             </div>
             <div className="container">
-                <HomePostsList businessesData={businessesData}/>
+                <HomePostsList loggedIn={loggedIn} businessesData={businessesData}/>
             </div>
         </>
     );
