@@ -8,7 +8,6 @@ import Login from "./yelp/login";
 import Signup from "./yelp/signup";
 import Profile from "./yelp/profile";
 import EditProfile from "./yelp/profile/edit-profile";
-import Following from "./yelp/profile/followings";
 
 function App() {
     return (
@@ -20,7 +19,7 @@ function App() {
                         <Route path="/review" element={<ReviewComponent/>}/>
                         <Route path="/review/:businessId" element={<ReviewComponent/>}/>
                         <Route path="/search" element={<SearchComponent/>}/>
-                        <Route path="/detail" element={<DetailComponent/>}/>
+                        <Route path="/detail/:businessId" element={<DetailComponent/>}/>
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/signup" element={<Signup/>}/>
                         <Route path="/profile" element={<Profile/>}/>
