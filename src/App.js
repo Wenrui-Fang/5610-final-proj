@@ -17,6 +17,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<HomeComponent/>}/>
                         <Route path="/review" element={<ReviewComponent/>}/>
+                        <Route path="/review/:businessId" element={<ReviewComponent/>}/>
                         <Route path="/search" element={<SearchComponent/>}/>
                         <Route path="/detail" element={<DetailComponent/>}/>
                         <Route path="/login" element={<Login/>}/>

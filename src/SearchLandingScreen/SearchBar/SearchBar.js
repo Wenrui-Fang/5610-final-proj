@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './index.module.css';
 import { Link, useNavigate } from "react-router-dom";
 import * as authService from "../../services/auth-service";
@@ -8,12 +8,17 @@ export function SearchBar(props) {
     const [location, setLocation] = useState(props.location || '');
 
     let loggedIn = false
-    // const [currentUser, setCurrentUser] = useState({});
-    // const getProfile = async () => await authService.profile()
-    //     .then(user => setCurrentUser(user));
-    // let user = getProfile();
-    // // console.log(currentUser)
-    // loggedIn = currentUser.username !== undefined;
+    const [currentUser, setCurrentUser] = useState({});
+    useEffect(()=> {
+        try {
+            const getProfile = async () => await authService.profile().then(user => setCurrentUser(user));
+            let user = getProfile();
+        } catch (e) {
+            setCurrentUser(undefined);
+        }
+    },[])
+    // console.log(currentUser)
+    loggedIn = currentUser.username !== undefined;
 
     const navigate = useNavigate();
 
@@ -98,7 +103,8 @@ export function SearchBar(props) {
                         }
                         {loggedIn &&
                             <>
-                                <Link to="/profile" className="text-decoration-none text-white">
+                                <Link to={`/profile/${currentUser.username}`}
+                                      className="text-decoration-none text-white">
                                     <i className="bi bi-person-circle fs-2"></i>
                                 </Link>
                             </>
