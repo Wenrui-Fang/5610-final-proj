@@ -6,7 +6,7 @@ import { Spinner } from '../../Spinner/Spinner.js';
 export function SearchResults(props) {
     let searchResults = <Spinner/>;
     if(props.businesses && props.businesses.length) {
-        searchResults = props.businesses.map(b => <SearchResult key={b.id} business={b}/>);
+        searchResults = props.businesses.map(b => <SearchResult key={b.id} business={b} loggedIn={props.loggedIn}/>);
     }
 
     return (
