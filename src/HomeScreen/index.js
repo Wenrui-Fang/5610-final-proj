@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import "./home.css"
-import { SearchBar } from "../SearchLandingScreen/SearchBar/SearchBar";
+import {SearchBar} from "../SearchLandingScreen/SearchBar/SearchBar";
 import HomePostsList from "../HomePostsList";
 import * as authService from "../services/auth-service.js"
 import * as api from "../services/officialyelp/yelp-api.js"
@@ -47,8 +47,10 @@ const HomeComponent = () => {
     return (
         <>
             <SearchBar loggedIn={loggedIn} currentUser={currentUser}/>
-            <div className="wd-home_banner2 position-relative"></div>
-            <HomePostsList loggedIn={loggedIn} businessesData={businessesData}/>
+            <div className="wd-home_banner position-relative"></div>
+            <div className="container">
+                <HomePostsList loggedIn={loggedIn} businessesData={businessesData}/>
+            </div>
         </>
     );
 };
