@@ -5,7 +5,8 @@ import {Link} from "react-router-dom";
 const ReviewItem = ({item}) => {
     const[postname, setname] = useState();
 
-    const [cafe, setCafe] = useState([])
+    const [business, setBusiness] = useState([])
+    // need to update searchURl
     const searchUrl = 'https://www.omdbapi.com/?apikey=b2bd5979&i='+ item.to;
 
 
@@ -24,10 +25,10 @@ const ReviewItem = ({item}) => {
             <div className="row">
 
                 <div className="col-2 col-sm-0 col-md-2 col-lg-2 d-none d-lg-block">
-
+                              {/*need to update the link part*/}
                     <Link to={`/details/${movies.imdbID}`} className="wd-gold">
-                    <img className="wd-poster wd-section-left" src={cafe.Poster} alt=""/>
-                        <p className="wd-cafe ">{cafe.Title}</p></Link>
+                    <img className="wd-poster wd-section-left" src={business.Poster} alt=""/>
+                        <p className="wd-cafe ">{business.Title}</p></Link>
                 </div>
 
                 <div className="col-10 col-sm-12 col-md-10 col-lg-10 ">

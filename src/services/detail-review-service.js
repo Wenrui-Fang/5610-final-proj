@@ -40,8 +40,8 @@ export const findAllReviewsByUsername = async (uid) => {
     return response.data;
 }
 
-export const findAllReviewByOMDB = async(mid) => {
-    const response = await axios.get(`${API_BASE}/movies/${mid}/reviews`);
+export const findAllReviewByYELP = async(mid) => {
+    const response = await axios.get(`${API_BASE}/business/${mid}/reviews`);
     return response.data;
 
 }

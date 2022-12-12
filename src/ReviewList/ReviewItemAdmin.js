@@ -4,13 +4,13 @@ import {Link} from "react-router-dom";
 
 const ReviewItem = ({item,deleteReview}) => {
 
-    const [cafe, setCafe] = useState([])
+    const [business, setBusiness] = useState([])
     const searchUrl = 'https://www.omdbapi.com/?apikey=b2bd5979&i='+ item.to;
 
     useEffect(() => {
         async function search()  {
             const response = await axios.get(`${searchUrl}`)
-            setCafe(response.data)
+            setBusiness(response.data)
         }
         search();
     }, [])
@@ -24,8 +24,8 @@ const ReviewItem = ({item,deleteReview}) => {
                     <div className="col-3 d-md-block d-sm-none d-none">
 
                         <Link to={`/details/${movies.imdbID}`} className="wd-gold">
-                        <img className="wd-poster wd-section-left" src={cafe.Poster} alt=""/>
-                            <p className="wd-cafe wd-gold">{cafe.Title}</p></Link>
+                        <img className="wd-poster wd-section-left" src={business.Poster} alt=""/>
+                            <p className="wd-business wd-gold">{business.Title}</p></Link>
                     </div>
 
 
