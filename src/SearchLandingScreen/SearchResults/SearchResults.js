@@ -10,16 +10,8 @@ export function SearchResults(props) {
     }
 
     return (
-        <div className="container">
-            <div className="row">
-                <div className="col-3"></div>
-                <div className="col-6">
-                    <div className={styles['search-results']}>
-                        {searchResults}
-                    </div>
-                </div>
-                <div className="col-3"></div>
-            </div>
+        <div className={styles['search-results']}>
+            {searchResults}
         </div>
     );
 }
