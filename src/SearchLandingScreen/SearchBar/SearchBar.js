@@ -29,7 +29,7 @@ export function SearchBar(props) {
 
     const sizeClass = props.small ? '' : 'is-medium';
     return (
-        <div className="wd-home_banner position-relative">
+        <div>
             <div className="row pt-3">
                 <div className="col-3">
                     <Link to="/" className="text-decoration-none">

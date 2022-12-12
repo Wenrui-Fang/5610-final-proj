@@ -14,7 +14,7 @@ export function SearchResult(props) {
     const addressLines = b.location.display_address.map(addressLine => <p key={b.id + addressLine}>{addressLine}</p>);
 
     return (
-        <Link to={loggedIn ? `/detail/${b.id}`: "/login"}>
+        <Link to={loggedIn ? `/detail/${b.id}`: "/login"} className="text-decoration-none text-black">
             <div className={styles['search-result']}>
                 <img src={b.image_url} alt='business' className={styles['business-image']}/>
                 <div className={styles['business-info']}>
