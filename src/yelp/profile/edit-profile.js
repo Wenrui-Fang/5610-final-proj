@@ -140,7 +140,7 @@ const EditProfile = () => {
                     <select
                         className="p-0 form-control border-0"
                         id="account" >
-                        <option>Bussiness account</option>
+                        <option>Business account</option>
                         <option selected>Personal account</option>
                     </select>
                 </div>
