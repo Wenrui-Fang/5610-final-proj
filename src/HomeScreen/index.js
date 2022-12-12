@@ -48,9 +48,20 @@ const HomeComponent = () => {
         <>
             <SearchBar loggedIn={loggedIn} currentUser={currentUser}/>
             <div className="wd-home_banner position-relative"></div>
-            <div className="container">
-                <HomePostsList loggedIn={loggedIn} businessesData={businessesData}/>
-            </div>
+            {
+                (currentUser.accountType===undefined || currentUser.accountType === 'PERSONAL') &&
+                <div className="container">
+                    <HomePostsList loggedIn={loggedIn} businessesData={businessesData}/>
+                </div>
+
+            }
+            {
+                currentUser.accountType === 'ADMIN' &&
+                <div>
+                    <h1>admin user</h1>
+                </div>
+
+            }
         </>
     );
 };
