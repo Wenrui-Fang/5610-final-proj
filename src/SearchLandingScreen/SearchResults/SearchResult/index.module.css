@@ -16,6 +16,7 @@
 }
 
 .contact-info p {
+    min-width: 300px;
     font-size: 0.85rem;
 }
 
