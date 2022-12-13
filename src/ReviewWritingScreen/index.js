@@ -23,7 +23,7 @@ const ReviewComponent = () => {
     }
 
     const nav = () => {
-        navigate(`/`)
+        navigate(`/detail/${businessId}`);
     }
 
     const [currentUser, setCurrentUser] = useState({});
@@ -34,6 +34,7 @@ const ReviewComponent = () => {
     const reviewClickHandler = () => {
         const newReview = {
             businessId: businessId,
+            businessName: businessName,
             text: reviewComment,
             star: starNum,
             reviewByUserId: currentUser._id
