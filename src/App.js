@@ -8,6 +8,7 @@ import Login from "./yelp/login";
 import Signup from "./yelp/signup";
 import Profile from "./yelp/profile";
 import EditProfile from "./yelp/profile/edit-profile";
+import ReviewItem from "./Review/ReviewItem";
 
 function App() {
     return (
@@ -26,6 +27,7 @@ function App() {
                         <Route path="/profile/:username/edit" element={<EditProfile/>}/>
                         <Route path="/profile/:username" element={<Profile/>}/>
                         <Route path="/profile/:username/*" element={<Profile/>}/>
+                        <Route path="/detail/:businessReview" element={<ReviewItem/>}/>
                     </Routes>
                 </div>
             </BrowserRouter>
