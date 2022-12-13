@@ -27,8 +27,11 @@ export const update = (user) =>
     api.put(`${BASE_URL}/api/users/${user._id}`,user)
         .then(response=>response.data);
 
-
-
 export const findUser = (username) =>
     api.get(`${BASE_URL}/api/users/username/${username}`)
         .then(response=>response.data);
+
+export const findUserById = (uid) => {
+    api.get(`${BASE_URL}/api/users/${uid}`)
+        .then(response=>response.data);
+}
