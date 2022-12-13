@@ -1,7 +1,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import * as service from "./review-service";
 import axios from 'axios';
-const REVIEW_API = 'http://localhost:4000/api/reviews';
+const REVIEW_API = `${API_BASE}/api/reviews`;
 
 export const findReviewThunk = createAsyncThunk(
     'review/findReview', async () =>

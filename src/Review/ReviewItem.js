@@ -6,7 +6,7 @@ import {deleteReviewThunk} from "../services/review-thunks";
 
 const ReviewItem = (
     {
-        review = { "_id": 123,
+        review = {
             "businessname": "GRANVILLE",
             "userName": "Shannon R.",
             "rating": "4.9",
@@ -16,8 +16,6 @@ const ReviewItem = (
                 "Sami was amazing, very attentive and her recommendations were great! Definitely will be back! Thanks Granville for the experience"
         }}
 ) => {
-    const reviews = useSelector(state => state.reviews)
-    //console.log(tuits)
 
     const dispatch = useDispatch();
     const deleteReviewHandler = (id) => {

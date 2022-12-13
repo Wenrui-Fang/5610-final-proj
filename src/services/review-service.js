@@ -1,12 +1,10 @@
 import axios from 'axios';
 
-//const TUITS_API = 'http://localhost:4000/api/tuits';
-//const TUITS_API = 'https://tuiter-node-server.herokuapp.com/api/tuits';
 const API_BASE = process.env.REACT_APP_API_BASE;
 console.log("API_BASE")
 console.log(API_BASE)
 const REVIEW_API = `${API_BASE}/reviews`;
-export const createReview = async (tuit) => {
+export const createReview = async (review) => {
     const response = await axios.post(REVIEW_API, review)
     return response.data;
 }
@@ -17,16 +15,16 @@ export const findReview = async () => {
 }
 export const deleteReview = async (review) => {
     console.log(review)
-    console.log(REVIEW_API/review._id)
+    console.log(REVIEW_API/review.businessname)
     const response = await axios
-        .delete(`${REVIEW_API}/${review._id}`);
+        .delete(`${REVIEW_API}/${review.businessname}`);
     return response.data;
 }
 export const updateReview = async (review) => {
     console.log(review)
-    console.log("likes")
-    console.log(review.likes)
+    console.log("rating")
+    console.log(review.rating)
     const response = await axios
-        .put(`${REVIEW_API}/${review._id}`, review);
+        .put(`${REVIEW_API}/${review.businessname}`, review);
     return review;
 }

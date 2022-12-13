@@ -1,0 +1,24 @@
+[
+  { "businessname": "Cheesecake Factory",
+    "userName": "Anna Whitehouse",
+    "rating": "4.6",
+    "hours": "10 a.m. to 0 p.m. 7 days a week",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRRNLMzLr2PNdAD_XO3u_BdUpvkt1YwM8626jJL3LPXw&s",
+    "review": "Great food and service, good prices, friendly server, dine in experience."
+  },
+  {"businessname": "Ding Tai Fung",
+    "userName": "Jack Lee",
+    "rating": "4.2",
+    "hours": "11 a.m. to 9 p.m. 7 days a week",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRpObNuDIN1DUhaeCLp_cnrkGeevQ5fL5fCw&usqp=CAU",
+    "review": "Must order: beef or chicken soup, dumplings in spicy sauce, & fried rice."
+  },
+  {
+    "businessname": "GRANVILLE",
+    "userName": "Shannon R.",
+    "rating": "4.9",
+    "hours": "11 a.m. to 8 p.m. 7 days a week",
+    "image": "https://s3-media0.fl.yelpcdn.com/bphoto/3KQX-y1nbWFAr8mt-I9vNg/l.jpg",
+    "review": "Great food, great staff, great music! Sami was amazing, very attentive and her recommendations were great! Definitely will be back! Thanks Granvillefor the experience"
+  }
+]
