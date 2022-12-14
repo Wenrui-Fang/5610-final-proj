@@ -19,7 +19,7 @@ const Collections = (props) => {
     }, [])
 
     return (
-        <div>
+        <div className="mb-5">
             <SearchResults businesses={bookmarks} loggedIn={true}/>
         </div>
     );
