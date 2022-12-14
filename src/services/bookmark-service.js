@@ -10,3 +10,16 @@ const api = axios.create({
 export const findAllBookmarksByUser = (uid) =>
     api.get(`${USERS_API}/${uid}/bookmarks`)
         .then(response => response.data);
+
+export const userBookmarkedBusinessOrNot = (uid, bid) =>
+    api.get(`${USERS_API}/${uid}/bookmarks/${bid}`)
+        .then(response => response.data);
+
+export const userBookmarkBusiness = (uid, bid) =>
+    api.post(`${USERS_API}/${uid}/bookmarks/${bid}`)
+        .then(response => response.data);
+
+export const userDeleteBookmarkedBusiness = (uid, bid) =>
+    api.delete(`${USERS_API}/${uid}/bookmarks/${bid}`)
+        .then(response => response.data);
+

@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './index.module.css';
-import StarRating from "../../../StarRate";
+import StarRatingPlain from "../../../StarRatePlain";
 import {Link} from "react-router-dom";
 
 export function SearchResult(props) {
@@ -23,7 +23,7 @@ export function SearchResult(props) {
                 {b.image_url && <img src={b.image_url} alt='business' className={styles['business-image']}/>}
                 <div className={styles['business-info']}>
                     <h2 className="">{b.name}</h2>
-                    <StarRating rating={b.rating}/>
+                    <StarRatingPlain rating={b.rating}/>
                     <p>{b.price} {tags}</p>
                 </div>
                 <div className={styles['contact-info']}>
