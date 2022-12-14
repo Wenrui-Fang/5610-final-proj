@@ -6,7 +6,7 @@ const User = ({user}) => {
         <li className="p-2 ttr-tuit list-group-item d-flex rounded-0">
             <div className="pe-2">
                 {
-                    <img src="https://pbs.twimg.com/profile_images/1599202909962412032/QbvIJjti_400x400.jpg"
+                    <img src={user.profilePhoto===undefined?"https://pbs.twimg.com/profile_images/1599202909962412032/QbvIJjti_400x400.jpg":`${user.profilePhoto}`}
                          className="ttr-tuit-avatar-logo" width="50px" height="50px"/>
                 }
             </div>

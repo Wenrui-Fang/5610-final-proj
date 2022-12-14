@@ -135,15 +135,6 @@ const EditProfile = () => {
                            type="file" name="myImage" accept="image/png, image/jpg"
                     />
                 </div>
-                <div className="border border-secondary rounded-3 p-2 mb-3">
-                    <label for="account">Select account</label>
-                    <select
-                        className="p-0 form-control border-0"
-                        id="account" >
-                        <option>Bussiness account</option>
-                        <option selected>Personal account</option>
-                    </select>
-                </div>
             </form></div>
     );
 };

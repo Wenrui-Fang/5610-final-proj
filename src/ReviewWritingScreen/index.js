@@ -4,9 +4,10 @@ import * as reviewService from "../services/ReviewService.js"
 import * as authService from "../services/auth-service.js"
 import {useNavigate, useParams} from "react-router";
 import {starNum} from "../StarRate";
+import {Link} from "react-router-dom";
 
 const ReviewComponent = () => {
-    const {businessId} = useParams();
+    const {businessId,businessName} = useParams();
     let [reviewComment, setReviewComment] = useState('');
     const navigate = useNavigate();
 
@@ -21,7 +22,7 @@ const ReviewComponent = () => {
     }
 
     const nav = () => {
-        navigate(`/`)
+        navigate(`/detail/${businessId}`);
     }
 
     const [currentUser, setCurrentUser] = useState({});
@@ -32,12 +33,13 @@ const ReviewComponent = () => {
     const reviewClickHandler = () => {
         const newReview = {
             businessId: businessId,
+            businessName: businessName,
             text: reviewComment,
             star: starNum,
             reviewByUserId: currentUser._id
         }
-        reviewService.createReview(newReview).then(() =>customizedAlert("Posted successfully! Jump in three seconds...", 3000))
-            .then(() =>setTimeout(nav, 3000))
+        reviewService.createReview(newReview).then(() => customizedAlert("Posted successfully! Jump in three seconds...", 3000))
+            .then(() => setTimeout(nav, 3000))
             .catch(e => alert(e));
     }
     return (
@@ -54,7 +56,9 @@ const ReviewComponent = () => {
             </div>
             <hr className="text-secondary"/>
             <div className="container">
-                <h2 className="fw-bolder">Business Name</h2>
+                <Link to={`/detail/${businessId}`} className="text-decoration-none">
+                    <h2 className="fw-bolder text-black">{businessName}</h2>
+                </Link>
                 Select a rating and leave you comment!
                 <div>
                     <h3><StarRating/></h3>

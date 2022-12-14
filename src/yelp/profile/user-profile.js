@@ -1,11 +1,13 @@
+import Collections from "./collections";
 import Following from "./followings";
 import Followers from "./followers";
 import React from "react";
 import {Link, Route, Routes, useNavigate,useLocation } from "react-router-dom";
 import * as authService from "../../services/auth-service";
 import * as followService from "../../services/follow-service";
+import Reviews from "./myreviews";
 
-const UserProfile = ({profile,currentUser,setProfile}) => {
+const AdminProfile = ({profile,currentUser,setProfile}) => {
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -112,11 +114,13 @@ const UserProfile = ({profile,currentUser,setProfile}) => {
                 </ul>
             </div>
             <Routes>
+                <Route path="/mycollects" element={<Collections profileId={profile._id}/>}/>
                 <Route path="/followings" element={<Following username={profile.username}/>}/>
                 <Route path="/followers" element={<Followers username={profile.username}/>}/>
+                <Route path="/myreviews" element={<Reviews profileId={profile._id}/>}/>
             </Routes>
         </>
     )
 }
 
-export default UserProfile;
+export default AdminProfile;
