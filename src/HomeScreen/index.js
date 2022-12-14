@@ -5,6 +5,7 @@ import HomePostsList from "../HomePostsList";
 import * as authService from "../services/auth-service.js"
 import * as api from "../services/officialyelp/yelp-api.js"
 import {useAddress} from "../services/GetUserAddress/GetAddress.js";
+import ReviewListAdmin from "../ReviewList/ReviewListAdmin.js";
 
 const HomeComponent = () => {
     let loggedIn = false
@@ -57,8 +58,8 @@ const HomeComponent = () => {
             }
             {
                 currentUser.accountType === 'ADMIN' &&
-                <div>
-                    <h1>admin user</h1>
+                <div className="container">
+                    <ReviewListAdmin/>
                 </div>
 
             }
