@@ -2,7 +2,7 @@ import {BrowserRouter} from "react-router-dom";
 import {Routes, Route} from "react-router";
 import HomeComponent from "./HomeScreen";
 import ReviewComponent from "./ReviewWritingScreen";
-import DetailComponent from "./DetailScreen";
+import DetailScreenComponent from "./DetailScreen";
 import SearchComponent from "./SearchLandingScreen";
 import Login from "./yelp/login";
 import Signup from "./yelp/signup";
@@ -19,7 +19,7 @@ function App() {
                         <Route path="/review" element={<ReviewComponent/>}/>
                         <Route path="/review/:businessName/:businessId" element={<ReviewComponent/>}/>
                         <Route path="/search" element={<SearchComponent/>}/>
-                        <Route path="/detail/:businessId" element={<DetailComponent/>}/>
+                        <Route path="/detail/:businessId" element={<DetailScreenComponent/>}/>
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/signup" element={<Signup/>}/>
                         <Route path="/profile" element={<Profile/>}/>

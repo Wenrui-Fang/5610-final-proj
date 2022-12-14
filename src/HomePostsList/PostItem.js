@@ -1,5 +1,5 @@
 import React from "react";
-import StarRating from "../StarRate";
+import StarRatingPlain from "../StarRatePlain";
 import {Link} from "react-router-dom";
 
 const PostItem = (props) => {
@@ -19,7 +19,7 @@ const PostItem = (props) => {
                                 {business.name}
                             </h3>
                             Do you recommend this business?
-                            <StarRating/>
+                            <StarRatingPlain rating={business.rating}/>
                         </div>
                     </div>
                 </div>
