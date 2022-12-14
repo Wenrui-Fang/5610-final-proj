@@ -23,7 +23,7 @@ function Login() {
             </div>
             <div className="container">
                 <div className="row mt-5">
-                    <div className="col-10 col-md-10 col-lg-7 col-xl-6 flex-container"
+                    <div className="col-12 col-md-6 col-lg-6 col-xl-6 flex-container"
                          style={{"position": "relative"}} >
                         <div className="signup-form-container">
                             <div className="header">
@@ -55,9 +55,9 @@ function Login() {
                         </div>
 
                     </div>
-                    <div className="col-2 col-md-2 col-lg-1 col-xl-2">
+                    <div className="d-none d-md-block col-6 col-md-6 col-lg-5 col-xl-6">
                         <div className="picture-container">
-                            <img src="https://s3-media0.fl.yelpcdn.com/assets/2/www/img/7922e77f338d/signup/signup_illustration.png"/>
+                            <img src="https://s3-media0.fl.yelpcdn.com/assets/2/www/img/7922e77f338d/signup/signup_illustration.png" width={300}/>
                         </div>
                     </div>
                </div>
