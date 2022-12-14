@@ -1,3 +1,4 @@
+import Collections from "./collections";
 import Following from "./followings";
 import Followers from "./followers";
 import React from "react";
@@ -112,6 +113,7 @@ const UserProfile = ({profile,currentUser,setProfile}) => {
                 </ul>
             </div>
             <Routes>
+                <Route path="/mycollects" element={<Collections profileId={profile._id}/>}/>
                 <Route path="/followings" element={<Following username={profile.username}/>}/>
                 <Route path="/followers" element={<Followers username={profile.username}/>}/>
             </Routes>
