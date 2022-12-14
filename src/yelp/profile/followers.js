@@ -17,7 +17,7 @@ const Followers = () => {
     },[]);
 
     return(
-        <div>
+        <div className="mb-5">
             <FollowList users={followersUser} following={false} />
         </div>
     )
