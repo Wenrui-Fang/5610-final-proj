@@ -5,6 +5,7 @@ import './index.css';
 import StarRating from "../StarRate";
 import * as yelpService from "../services/officialyelp/yelp-api"
 import * as reviewService from "../services/ReviewService";
+import * as service from "../services/follow-service";
 import {useParams, Link} from "react-router-dom";
 import {getReviewsByBusinessId} from "../services/ReviewService";
 import ReviewList from "../ReviewList/ReviewList";
@@ -12,43 +13,27 @@ import ReviewList from "../ReviewList/ReviewList";
 const DetailComponent = () => {
 
     const {businessId} = useParams();
-    const [business, setBusiness] = useState({
-                                             });
-    const [reviews, setReviews] = useState({});
+    const [business, setBusiness] = useState({});
+    const [reviews, setReviews] = useState([]);
+    const [address,setAddress] = useState({});
+
     useEffect(() => {
        try{
            const getBusiness = async() => await yelpService.findBusinessById(businessId)
-               .then(bus => setBusiness(bus));
+               .then((bus) => setBusiness(bus));
            let bus = getBusiness();
-           console.log(businessId);
-           const getReviews = async() => await getReviewsByBusinessId(businessId)
-               .then(reviews =>
-                     {
-                         console.log(reviews);
-                         setReviews(reviews)
-
-                     });
+           const getReviews = async() => await reviewService.getReviewsByBusinessId(businessId)
+               .then((reviews)=>setReviews(reviews));
            let review = getReviews();
-           console.log(reviews[0]);
        } catch (e){
 
        }
     },[]);
 
-
-    // let startStr = business.hours?business.hours[0].open[3].start.toString():undefined;
-    // let startTime = startStr===undefined?undefined:startStr.substring(0,2) + ":" + startStr.substring(2);
-    // let endStr = business.hours?business.hours[0].open[3].end.toString():undefined;
-    // let endTime = endStr===undefined?undefined:endStr.substring(0,2) + ":" + endStr.substring(2);
-
-    const getTime = (str) => {
-        return str.substring(0,2) + ":" + str.substring(2);
-    }
-
     return (
         <>
             <h1>Detail Screen</h1>
-            <div className="photoHeader mb-2 position-relative">
+            <div className="photoHeader mb-3 position-relative">
                 <div className="flex-container">
                     {
                         business.photos && business.photos.map(photo => {return(<img className="headerPicture "
@@ -67,7 +52,7 @@ const DetailComponent = () => {
                 <div className="front-shadow header-margin" ></div>
                 <div className="info-overlay position-absolute">
                     <span className="business-name">{business.name}</span>
-                    <StarRating props={business} />
+                    <StarRating rating={business.rating} />
                     <div>
                         <b>
                             {business.is_claimed && <span className="claimedStyle"><i className="bi bi-patch-check-fill"/> Claimed · </span>}
@@ -77,20 +62,15 @@ const DetailComponent = () => {
                         </b>
                     </div>
                     <div>
-
                         {business.is_closed&& <span className="text-red">Closed </span>}
                         {!business.is_closed&& <span className="text-red">Opening </span>}
-                        {/*{*/}
-                        {/*    startTime&&endTime&&<b><span className="text-white">{startTime} AM - {endTime} PM</span></b>*/}
-                        {/*}*/}
-
                     </div>
                 </div>
             </div>
 
-            <div className="container">
-                <div className="sub-info">
-                    <Stack direction='row' spacing={2}>
+            <div className="container d-flex">
+                <div className="sub-info col-9 col-sm-8">
+                    <Stack direction='row' spacing={2} >
                         <Link to={`/review/${business.name}/${businessId}`}>
                             <Button leftIcon={<Icon as={BsStar} />} colorScheme='red' variant='solid'>
                                 Write a reivew
@@ -100,48 +80,26 @@ const DetailComponent = () => {
                             Save
                         </Button>
                     </Stack>
-                    <div>
-                        {/*<ReviewList reviews={reviews}/>*/}
-                    </div>
-                    <div>
-                        <div className="float-end">
-                            <span className="subtitle">Hours</span>
-                            <table className="hourTable">
-                                <tbody>
-                                <tr>
-                                    <td className="td-width">Mon</td>
-                                    {/*<td className="">{getTime(business.hours[0].open[0].start.toString())} AM - {getTime(business.hours[0].open[0].end.toString())} PM</td>*/}
-                                </tr>
-                                <tr>
-                                    <td className="td-width">Tue</td>
-                                    <td>Closed</td>
-                                </tr>
-                                <tr>
-                                    <td className="td-width">Wed</td>
-                                    <td>Closed</td>
-                                </tr>
-                                <tr>
-                                    <td className="td-width">Thu</td>
-                                    <td>Closed</td>
-                                </tr>
-                                <tr>
-                                    <td className="td-width">Fri</td>
-                                    <td>Closed</td>
-                                </tr>
-                                <tr>
-                                    <td className="td-width">Sat</td>
-                                    <td>Closed</td>
-                                </tr>
-                                <tr>
-                                    <td className="td-width">Sun</td>
-                                    <td>Closed</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <hr className="mt-3"/>
+                    <div className="mt-3">
+                        { reviews && <ReviewList reviews={reviews}/> }
                     </div>
                 </div>
+                <div className="col-3 float-end ms-5 mt-3">
+                    <ul className="list-group">
+                        <li className="list-group-item">
+                            {business.display_phone}
+                            <i className="bi bi-telephone float-lg-end"/>
+                        </li>
+                        <li className="list-group-item">
+                            <a href={`https://www.yelp.com/map/${business.alias}`} className="wd-link"><p className="fw-bold">Get direction</p></a>
+                            {/*{business&&business.location.display_address.join(' ')}*/}
+                            <i className="bi bi-map float-lg-end"/>
+                        </li>
+                    </ul>
+                </div>
             </div>
+
 
         </>
 

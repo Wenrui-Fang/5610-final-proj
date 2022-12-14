@@ -36,7 +36,7 @@ function Login() {
                                        href="https://www.yelp.com/tos/privacy_policy"> Privacy
                                         Policy</a></p>
                             </div>
-                            <div>
+                            <div className="mt-2">
                                 <input className="mb-2 form-control"
                                        onChange={(e) =>
                                            setLoginUser({...loginUser, username: e.target.value})}
