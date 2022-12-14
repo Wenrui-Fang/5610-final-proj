@@ -5,6 +5,7 @@ import * as authService from "../services/auth-service.js"
 import {useNavigate, useParams} from "react-router";
 import {starNum} from "../StarRate";
 import {Link} from "react-router-dom";
+import {SearchBar} from "../SearchLandingScreen/SearchBar/SearchBar";
 
 const ReviewComponent = () => {
     const {businessId,businessName} = useParams();
@@ -44,16 +45,7 @@ const ReviewComponent = () => {
     }
     return (
         <>
-            <div className="row pt-3">
-                <div className="col-6">
-                    <h1 className="ps-3 fw-bolder">Yelp
-                        <i className="bi bi-yelp text-danger"></i>
-                    </h1>
-                </div>
-                <div className="col-6">
-                    <i className="bi bi-person-circle fs-2 float-end pe-5"></i>
-                </div>
-            </div>
+            <SearchBar loggedIn={true} currentUser={currentUser}/>
             <hr className="text-secondary"/>
             <div className="container">
                 <Link to={`/detail/${businessId}`} className="text-decoration-none">
