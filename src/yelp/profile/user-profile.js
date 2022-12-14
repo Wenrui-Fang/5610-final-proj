@@ -7,7 +7,7 @@ import * as authService from "../../services/auth-service";
 import * as followService from "../../services/follow-service";
 import Reviews from "./myreviews";
 
-const UserProfile = ({profile,currentUser,setProfile}) => {
+const AdminProfile = ({profile,currentUser,setProfile}) => {
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -123,4 +123,4 @@ const UserProfile = ({profile,currentUser,setProfile}) => {
     )
 }
 
-export default UserProfile;
+export default AdminProfile;
