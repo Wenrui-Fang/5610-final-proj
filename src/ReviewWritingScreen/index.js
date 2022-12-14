@@ -7,8 +7,7 @@ import {starNum} from "../StarRate";
 import {Link} from "react-router-dom";
 
 const ReviewComponent = () => {
-    const {businessId} = useParams();
-    const {businessName} = useParams();
+    const {businessId,businessName} = useParams();
     let [reviewComment, setReviewComment] = useState('');
     const navigate = useNavigate();
 
@@ -57,7 +56,7 @@ const ReviewComponent = () => {
             </div>
             <hr className="text-secondary"/>
             <div className="container">
-                <Link to="/detail/:businessId" className="text-decoration-none">
+                <Link to={`/detail/${businessId}`} className="text-decoration-none">
                     <h2 className="fw-bolder text-black">{businessName}</h2>
                 </Link>
                 Select a rating and leave you comment!

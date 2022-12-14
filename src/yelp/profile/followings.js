@@ -19,7 +19,7 @@ const Following = () => {
     },[]);
 
     return(
-        <div>
+        <div className="mb-5">
             <FollowList users={followingUser} following={true}/>
         </div>
     );

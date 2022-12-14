@@ -13,7 +13,7 @@ const ReviewItemAdmin = ({item,deleteReview}) => {
             .then(user => setUser(user));
         let user = getUserById();
 
-    })
+    },[])
 
     return (
         <>

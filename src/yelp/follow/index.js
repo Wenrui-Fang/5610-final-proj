@@ -19,14 +19,17 @@ export const FollowList = ({users,following}) => {
 
 
     return (
-        <div className="list-group">
+        <ul className="list-group mt-3">
             {
                 following&&users.map(user => <User key={user.userFollowed.username} user={user.userFollowed}/>)
             }
             {
                 !following&&users.map(user => <User key={user.userFollowing.username} user={user.userFollowing}/>)
             }
-        </div>
+            {
+                users.length===0 && <li className="list-group-item">No user right now!</li>
+            }
+        </ul>
     )
 
 }

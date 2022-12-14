@@ -16,7 +16,7 @@ const ReviewListItem = ({item}) => {
         } catch(e){
 
         }
-    })
+    },[])
 
     return (
         <>

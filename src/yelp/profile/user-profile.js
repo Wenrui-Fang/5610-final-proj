@@ -5,6 +5,7 @@ import React from "react";
 import {Link, Route, Routes, useNavigate,useLocation } from "react-router-dom";
 import * as authService from "../../services/auth-service";
 import * as followService from "../../services/follow-service";
+import Reviews from "./myreviews";
 
 const UserProfile = ({profile,currentUser,setProfile}) => {
 
@@ -116,6 +117,7 @@ const UserProfile = ({profile,currentUser,setProfile}) => {
                 <Route path="/mycollects" element={<Collections profileId={profile._id}/>}/>
                 <Route path="/followings" element={<Following username={profile.username}/>}/>
                 <Route path="/followers" element={<Followers username={profile.username}/>}/>
+                <Route path="/myreviews" element={<Reviews profileId={profile._id}/>}/>
             </Routes>
         </>
     )

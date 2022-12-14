@@ -1,13 +1,9 @@
 import React, {useEffect, useState} from "react";
-import {Button, Icon, Stack} from "@chakra-ui/react";
-import { BsStar } from "react-icons/bs";
 import './index.css';
 import StarRating from "../StarRate";
 import * as yelpService from "../services/officialyelp/yelp-api"
 import * as reviewService from "../services/ReviewService";
-import * as service from "../services/follow-service";
 import {useParams, Link} from "react-router-dom";
-import {getReviewsByBusinessId} from "../services/ReviewService";
 import ReviewList from "../ReviewList/ReviewList";
 
 const DetailComponent = () => {
@@ -15,7 +11,6 @@ const DetailComponent = () => {
     const {businessId} = useParams();
     const [business, setBusiness] = useState({});
     const [reviews, setReviews] = useState([]);
-    const [address,setAddress] = useState({});
 
     useEffect(() => {
        try{
@@ -32,7 +27,6 @@ const DetailComponent = () => {
 
     return (
         <>
-            <h1>Detail Screen</h1>
             <div className="photoHeader mb-3 position-relative">
                 <div className="flex-container">
                     {
@@ -47,9 +41,7 @@ const DetailComponent = () => {
                         business.photos && business.photos.map(photo => {return(<img className="headerPicture "
                                                                                      src={`${photo}`} />)})
                     }
-
                 </div>
-                <div className="front-shadow header-margin" ></div>
                 <div className="info-overlay position-absolute">
                     <span className="business-name">{business.name}</span>
                     <StarRating rating={business.rating} />
@@ -70,16 +62,17 @@ const DetailComponent = () => {
 
             <div className="container d-flex">
                 <div className="sub-info col-9 col-sm-8">
-                    <Stack direction='row' spacing={2} >
+
+                    <div>
                         <Link to={`/review/${business.name}/${businessId}`}>
-                            <Button leftIcon={<Icon as={BsStar} />} colorScheme='red' variant='solid'>
-                                Write a reivew
-                            </Button>
+                            <button type="button" className="btn btn-danger">
+                                <i className="bi bi-star me-2"/><span>Write a reivew</span>
+                            </button>
                         </Link>
-                        <Button leftIcon={<Icon as={BsStar} />} colorScheme='gray' variant='outline'>
-                            Save
-                        </Button>
-                    </Stack>
+                        <button type="button" className="btn btn-light border-1 ms-3">
+                            <i className="bi bi-bookmark me-2"/><span>Save</span>
+                        </button>
+                    </div>
                     <hr className="mt-3"/>
                     <div className="mt-3">
                         { reviews && <ReviewList reviews={reviews}/> }
