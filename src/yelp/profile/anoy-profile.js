@@ -1,16 +1,7 @@
-import Collections from "./collections";
-import Following from "./followings";
-import Followers from "./followers";
+
 import React from "react";
-import {Link, Route, Routes, useNavigate,useLocation } from "react-router-dom";
-import * as authService from "../../services/auth-service";
-import * as followService from "../../services/follow-service";
-import Reviews from "./myreviews";
 
 const AnoyProfile = ({profile}) => {
-
-    const navigate = useNavigate();
-    const location = useLocation();
 
     console.log(profile);
 

@@ -8,7 +8,6 @@ const ReviewItemAdmin = ({item, deleteReview}) => {
     const [user, setUser] = useState({});
 
     useEffect(()=>{
-
         try{
             const getUserById = async() => await authService.findUserById(item.reviewByUserId)
                 .then((user) => setUser(user));

@@ -18,13 +18,13 @@ const Profile = () => {
             console.log(username);
             const getProfile = async() => await authService.profile().then(user=>setCurrentUser(user));
             let p = getProfile();
-            let user
-                if(username!==user.username){
+
+                if(username!==currentUser.username){
                     const getUserByName = async() => await authService.findUser(username)
                         .then(user => {
                             setProfile(user);
                         });
-                    user = getUserByName();
+                    let user = getUserByName();
                 }else{
                     setProfile(currentUser);
                 }
@@ -34,6 +34,7 @@ const Profile = () => {
             const getUserByName = async() => await authService.findUserBySingleName(username)
                 .then(user=> setProfile(user))
             let user = getUserByName();
+            console.log(e);
             console.log(profile);
         }
     }, [username]);

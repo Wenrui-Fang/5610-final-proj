@@ -1,8 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import * as service from "../../services/auth-service";
+import {findUserBySingleName} from "../../services/auth-service";
+import {useParams} from "react-router";
 
 const EditProfile = () => {
+
+    const {username} = useParams();
     const [profile, setProfile] = useState({});
     const [updateUser,setUpdateUser] = useState({});
     const navigate = useNavigate();
@@ -30,7 +34,7 @@ const EditProfile = () => {
 
     useEffect(() => {
         try {
-            const getProfile = async() => await service.profile().then((user) => {
+            const getProfile = async() => await service.findUserBySingleName(username).then((user) => {
                 if(user.dateOfBirth!==undefined){
                     user.dateOfBirth = user.dateOfBirth.substring(0,10).toString();
                 }
@@ -118,14 +122,6 @@ const EditProfile = () => {
                     <input id="email" placeholder={`${profile.email}`}
                            className="p-0 form-control border-0"
                            type="email"/>
-                </div>
-                <div className="border border-secondary rounded-3 p-2 mb-3">
-                    <label htmlFor="password">Reset password</label>
-                    <input id="password"
-                           className="p-0 form-control border-0"
-                           type="password"
-                           onChange={(e) =>
-                               setUpdateUser({...updateUser,password: e.target.value})}/>
                 </div>
                 <div className="border border-secondary rounded-3 p-2 mb-3">
                     <label htmlFor="photo">Profile photo</label>
