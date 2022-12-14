@@ -55,7 +55,7 @@ const SearchComponent = () => {
             <SearchResultsSummary term={termParam}
                                   location={locationParam}
             />
-            <SearchResults businesses={businesses} loggedIn={loggedIn}/>
+            <SearchResults businesses={businesses} userId={currentUser._id} loggedIn={loggedIn}/>
         </div>
     );
 };

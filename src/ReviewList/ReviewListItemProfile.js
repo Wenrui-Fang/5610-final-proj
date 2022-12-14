@@ -12,7 +12,7 @@ const ReviewListItemProfile = ({item}) => {
                             <div className="w-100">
                                 <h2
                                     className="fs-5 mt-3">
-                                    <Link to={`/detail/${item.businessName}`} className="text-decoration-none" >
+                                    <Link to={`/detail/${item.businessId}/${item.reviewByUserId}`} className="text-decoration-none" >
                                         <b>{item.businessName}</b>
                                     </Link>
                                 </h2>

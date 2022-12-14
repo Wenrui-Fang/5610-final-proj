@@ -114,7 +114,7 @@ const AdminProfile = ({profile,currentUser,setProfile}) => {
                 </ul>
             </div>
             <Routes>
-                <Route path="/mycollects" element={<Collections profileId={profile._id}/>}/>
+                <Route path="/mycollects" element={<Collections userId={currentUser._id} profileId={profile._id}/>}/>
                 <Route path="/followings" element={<Following username={profile.username}/>}/>
                 <Route path="/followers" element={<Followers username={profile.username}/>}/>
                 <Route path="/myreviews" element={<Reviews profileId={profile._id}/>}/>

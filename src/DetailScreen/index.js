@@ -24,7 +24,7 @@ const DetailScreenComponent = () => {
     return (
         <>
             <SearchBar loggedIn={loggedIn} currentUser={currentUser} />
-            <DetailComponent userId={currentUser._id} />
+            <DetailComponent />
         </>
     );
 }

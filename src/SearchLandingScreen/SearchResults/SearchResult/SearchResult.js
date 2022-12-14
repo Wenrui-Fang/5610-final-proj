@@ -18,7 +18,7 @@ export function SearchResult(props) {
     }
 
     return (
-        <Link to={loggedIn ? `/detail/${b.id}`: "/login"} className="text-decoration-none text-black">
+        <Link to={loggedIn ? `/detail/${b.id}/${props.userId}`: "/login"} className="text-decoration-none text-black">
             <div className={styles['search-result']}>
                 {b.image_url && <img src={b.image_url} alt='business' className={styles['business-image']}/>}
                 <div className={styles['business-info']}>

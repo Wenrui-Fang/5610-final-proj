@@ -22,14 +22,14 @@ const ReviewComponent = () => {
         document.body.appendChild(el);
     }
 
-    const nav = () => {
-        navigate(`/detail/${businessId}`);
-    }
-
     const [currentUser, setCurrentUser] = useState({});
     const getProfile = async () => await authService.profile()
         .then(user => setCurrentUser(user));
     let user = getProfile();
+
+    const nav = () => {
+        navigate(`/detail/${businessId}/${currentUser._id}`);
+    }
 
     const reviewClickHandler = () => {
         const newReview = {
@@ -48,7 +48,7 @@ const ReviewComponent = () => {
             <SearchBar loggedIn={true} currentUser={currentUser}/>
             <hr className="text-secondary"/>
             <div className="container">
-                <Link to={`/detail/${businessId}`} className="text-decoration-none">
+                <Link to={`/detail/${businessId}/${currentUser._id}`} className="text-decoration-none">
                     <h2 className="fw-bolder text-black">{businessName}</h2>
                 </Link>
                 Select a rating and leave you comment!

@@ -7,12 +7,11 @@ import {useParams, Link} from "react-router-dom";
 import ReviewList from "../ReviewList/ReviewList";
 import { userBookmarkedBusinessOrNot, userBookmarkBusiness, userDeleteBookmarkedBusiness } from "../services/bookmark-service";
 
-const DetailComponent = (props) => {
+const DetailComponent = () => {
 
-    const {businessId} = useParams();
+    const {businessId, userId} = useParams();
     const [business, setBusiness] = useState({});
     const [reviews, setReviews] = useState([]);
-    const [address,setAddress] = useState({});
     const [bookmarkedFlag, setBookmarkedFlag] = useState(false);
 
     useEffect(() => {
@@ -23,7 +22,7 @@ const DetailComponent = (props) => {
            const getReviews = async() => await reviewService.getReviewsByBusinessId(businessId)
                .then((reviews)=>setReviews(reviews));
            let review = getReviews();
-           const getBookmarkedFlag = async() => await userBookmarkedBusinessOrNot(props.userId, businessId)
+           const getBookmarkedFlag = async() => await userBookmarkedBusinessOrNot(userId, businessId)
                .then(response => setBookmarkedFlag(!!response));
             let bFlag = getBookmarkedFlag();
        } catch (e){
@@ -32,13 +31,13 @@ const DetailComponent = (props) => {
     },[]);
 
     const bookmarkBusiness = async () => {
-        userBookmarkBusiness(props.userId, businessId)
+        userBookmarkBusiness(userId, businessId)
             .then(data => setBookmarkedFlag(true))
             .catch(e => console.log(e));
     }
 
     const deleteBookmark = async () => {
-        userDeleteBookmarkedBusiness(props.userId, businessId)
+        userDeleteBookmarkedBusiness(userId, businessId)
             .then(data => setBookmarkedFlag(false))
             .catch(e => console.log(e));
     }

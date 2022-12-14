@@ -22,7 +22,7 @@ const ReviewItemAdmin = ({item, deleteReview}) => {
             <li className="list-group-item">
                 <div className="row">
                     <div className="col-3 d-md-block d-sm-none d-none">
-                        <Link to={`/details/${item.businessId}`} className="wd-gold">
+                        <Link to={`/detail/${item.businessId}/${item.reviewByUserId}`} className="wd-gold">
                             <p className="wd-movie wd-gold">{item.businessName}</p>
                         </Link>
                     </div>

@@ -6,6 +6,7 @@ import {SearchResults} from "../../SearchLandingScreen/SearchResults/SearchResul
 
 const Collections = (props) => {
     const profileId = props.profileId;
+    const userId = props.userId
     const [bookmarks, setBookmarks] = useState([]);
 
     useEffect(() => {
@@ -20,7 +21,7 @@ const Collections = (props) => {
 
     return (
         <div className="mb-5">
-            <SearchResults businesses={bookmarks} loggedIn={true}/>
+            <SearchResults businesses={bookmarks} userId={userId} loggedIn={true}/>
         </div>
     );
 };
