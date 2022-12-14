@@ -3,9 +3,8 @@ import Followers from "./followers";
 import React from "react";
 import {Link, Route, Routes, useNavigate,useLocation } from "react-router-dom";
 import * as authService from "../../services/auth-service";
-import * as followService from "../../services/follow-service";
 
-const UserProfile = ({profile,currentUser}) => {
+const AdminProfile = ({profile,currentUser}) => {
 
     const navigate = useNavigate();
     const logout = () => {
@@ -63,4 +62,4 @@ const UserProfile = ({profile,currentUser}) => {
     )
 }
 
-export default UserProfile;
+export default AdminProfile;

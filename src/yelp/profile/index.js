@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {HashRouter, Link, Route, Routes, useNavigate, useLocation} from "react-router-dom";
 import * as authService from "../../services/auth-service";
-import * as followService from "../../services/follow-service";
 import './index.css';
 import {useParams} from "react-router";
-import Following from "./followings";
-import Followers from "./followers";
 import UserProfile from "./user-profile";
+import AdminProfile from "./admin-profile";
 
 const Profile = () => {
     const {username} = useParams();
@@ -49,7 +47,7 @@ const Profile = () => {
             }
             {
                 currentUser.accountType==='ADMIN' &&
-                <UserProfile profile={profile} currentUser={currentUser}/>
+                <AdminProfile profile={profile} currentUser={currentUser}/>
             }
 
         </div>
