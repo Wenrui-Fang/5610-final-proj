@@ -21,7 +21,15 @@ const Collections = (props) => {
 
     return (
         <div className="mb-5">
-            <SearchResults businesses={bookmarks} userId={userId} loggedIn={true}/>
+            {
+                bookmarks && bookmarks.length>0 && <SearchResults businesses={bookmarks} userId={userId} loggedIn={true}/>
+            }
+            <ul className="list-group mt-3">
+            {
+                !bookmarks || bookmarks.length === 0 && <li className="list-group-item">No bookmarks right now!</li>
+            }
+            </ul>
+
         </div>
     );
 };
