@@ -62,6 +62,13 @@ const HomeComponent = () => {
                 </div>
 
             }
+            {
+                currentUser.accountType === 'BUSSINESS' &&
+                <div>
+                    <h1>bussiness</h1>
+                </div>
+
+            }
         </>
     );
 };
