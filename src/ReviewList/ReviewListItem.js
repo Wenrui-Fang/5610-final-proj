@@ -5,8 +5,7 @@ import StarRating from "../StarRate";
 
 const ReviewListItem = ({item}) => {
 
-    const [user, setUser] = useState([{}]);
-
+    const [user, setUser] = useState({});
     useEffect(()=>{
         try{
             const getUserById = async() => await authService.findUserById(item.reviewByUserId)

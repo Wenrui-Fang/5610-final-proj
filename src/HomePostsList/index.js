@@ -15,7 +15,7 @@ const HomePostsList = (props) => {
             <ul className="list-inline">
                 {
                     businessesData.map(business =>
-                        <PostItem loggedIn={loggedIn} business={business}/>)
+                        <PostItem loggedIn={loggedIn} key={business.id} business={business}/>)
                 }
             </ul>
         </>
