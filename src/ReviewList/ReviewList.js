@@ -3,20 +3,18 @@ import ReviewListItem from "./ReviewListItem";
 
 const ReviewList = ({reviews}) => {
 
-    function comp(a,b) {
 
-        return new Date(b.reviewTime).getTime()-new Date(a.reviewTime).getTime();
-    }
-    // reviews.sort(comp);
 
     return (
         <>
-            <p className="wd-title wd-gold">Latest Reviews</p>
+            <p className="fw-bold wd-review-title">Latest Reviews</p>
             <ul className="list-group">
                 {
-                    reviews.map && reviews.map(review => {return(<ReviewListItem item={review}/>
-                );
-                })}
+                    reviews&&reviews.map(review => <ReviewListItem key={review._id} item={review}/>)
+                }
+                {
+                    reviews.length===0 && <li className="list-group-item">No review right now!</li>
+                }
             </ul>
         </>
     );

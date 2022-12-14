@@ -8,7 +8,7 @@
 }
 
 .info-overlay{
-    left:150px;
+    left:19%;
     bottom: 10px;
 }
 
@@ -38,4 +38,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.reviewList-photo{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.wd-review-title{
+    font-size:30px;
+}
+
+.wd-link{
+    color: dodgerblue;
 }

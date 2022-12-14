@@ -7,7 +7,7 @@ function Login() {
     const navigate = useNavigate();
     const login = () => {
         service.login(loginUser)
-            .then((user)=>navigate(`/profile/${user.username}`))
+            .then((user)=>navigate(`/`))
             .catch(e => alert(e));
     }
 
@@ -36,7 +36,7 @@ function Login() {
                                        href="https://www.yelp.com/tos/privacy_policy"> Privacy
                                         Policy</a></p>
                             </div>
-                            <div>
+                            <div className="mt-2">
                                 <input className="mb-2 form-control"
                                        onChange={(e) =>
                                            setLoginUser({...loginUser, username: e.target.value})}

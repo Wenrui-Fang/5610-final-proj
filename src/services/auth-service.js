@@ -31,7 +31,6 @@ export const findUser = (username) =>
     api.get(`${BASE_URL}/api/users/username/${username}`)
         .then(response=>response.data);
 
-export const findUserById = (uid) => {
+export const findUserById = (uid) =>
     api.get(`${BASE_URL}/api/users/${uid}`)
         .then(response=>response.data);
-}
